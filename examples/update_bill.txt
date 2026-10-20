@@ -1,0 +1,9 @@
+Debit Note
+Reference No: DN-2026-001
+Document Date: 2026-10-20
+Issuer: Destination Agent
+Recipient: Origin Agent
+Description | Amount | Currency | Payment Term
+Handling Fee | 40.00 | USD | PP
+Total: USD 40.00
+请将该笔费用的金额更正为40.00；其他字段不变。

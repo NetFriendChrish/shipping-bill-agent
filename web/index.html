@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>航运账单助手 · Cargo Ledger</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<aside>
+  <a class="brand" href="/" aria-label="航运账单助手首页"><span class="brandmark">CL</span><span>CARGO<br>LEDGER</span></a>
+  <div class="nav active"><span>▧</span> 账单工作台</div>
+  <div class="aside-bottom"><span class="live"></span> 本地运行<br><small>文档 → 费用 → 可审计 JSON</small></div>
+</aside>
+<main>
+  <header><div class="eyebrow">OPERATIONS / FINANCE</div><a href="/docs" target="_blank" rel="noopener">API 文档 ↗</a></header>
+  <section class="intro"><div><div class="eyebrow">SHIPPING BILL AGENT</div><h1>让每一笔费用，<br>都有据可查。</h1><p>从邮件、账单和费用表中提取费用，核对已有记录，生成可复核的账单变更建议。</p></div><div class="intro-side"><span class="big-number">01—06</span><span>解析 / 提取 / 标准化<br>校验 / 匹配 / 留痕</span></div></section>
+  <div class="workspace">
+    <section class="panel input-panel">
+      <div class="section-heading"><h2><span>01</span> 导入与设置</h2><button id="demo" class="text-button" type="button">运行题目样例 ↗</button></div>
+      <form id="form">
+        <label class="dropzone" id="dropzone"><input id="files" type="file" name="files" multiple accept=".eml,.pdf,.png,.jpg,.jpeg,.tif,.tiff,.xls,.xlsx,.doc,.docx,.csv,.txt"><span class="upload-icon">↑</span><strong>选择文件，或拖到这里</strong><span>EML · PDF · 图片 · Excel · Word</span><small>每批最多 30 个文件，每文件最多 25 MB</small></label>
+        <div id="selected" class="selected" aria-live="polite">尚未选择文件</div>
+        <label class="field">当前记账主体<input id="entity" name="entity" placeholder="例如：NEPTUNE SHIPPING LIMITED" value="NEPTUNE SHIPPING LIMITED"><small>AR/AP 以此主体的收付视角判断，请填写材料中的企业名称。</small></label>
+        <label class="field">主体别名 <span class="optional">可选，以分号分隔</span><input name="aliases" value="NEPTUNE SHIPPING LIMITED (LAX)" placeholder="同一企业的明确别名"></label>
+        <div class="field-row"><label class="field">费用提取<select name="extractor" id="extractor"><option value="rules">本地规则演示</option><option value="llm">LangChain 大模型</option></select></label><label class="field">PDF / 图片识别<select name="ocr"><option value="local">本地文本 / RapidOCR</option><option value="remote">题目指定 OCR API</option></select></label></div>
+        <label class="field existing">已有账单 <span class="optional">可选 · JSON 数组</span><input name="existing" type="file" accept=".json"><small>上传已有账单后，检测新增、明确修改和重复输入。</small></label>
+        <div id="config" class="config-note">正在读取配置…</div>
+        <button id="submit" class="primary" type="submit">解析并核对账单 <span>→</span></button>
+        <p class="footnote">生成变更建议与审计记录；结果不会直接写入财务系统。</p>
+      </form>
+    </section>
+    <section class="panel result-panel" aria-live="polite">
+      <div class="section-heading"><h2><span>02</span> 处理结果</h2><span id="status" class="status">等待导入</span></div>
+      <div id="error" class="error" hidden></div>
+      <div id="empty" class="empty"><div class="ledger-icon">≡</div><h3>先从一份文件开始</h3><p>运行题目样例，或上传你的文件。<br>每条费用都保留原始证据和处理依据。</p><div class="flow">解析 <b>→</b> 提取 <b>→</b> 校验 <b>→</b> 匹配</div></div>
+      <div id="results" hidden>
+        <div class="metrics" id="metrics"></div>
+        <div id="run-note" class="run-note"></div>
+        <div class="table-wrap"><table><thead><tr><th>费用 / 单据</th><th>金额</th><th>收付</th><th>操作</th></tr></thead><tbody id="rows"></tbody></table></div>
+        <div class="downloads" id="downloads"></div>
+        <details class="diagnostics"><summary>文档解析记录</summary><div id="diagnostics"></div></details>
+      </div>
+    </section>
+  </div>
+  <footer>CARGO LEDGER <span>可追溯的费用提取与账单核对</span><span>Python + LangChain</span></footer>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

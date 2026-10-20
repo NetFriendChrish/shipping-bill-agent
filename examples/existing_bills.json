@@ -1,0 +1,34 @@
+[
+  {
+    "record_id": "existing-DN-2026-001-handling",
+    "operation": "NO_CHANGE",
+    "document_info": {
+      "document_type": "Debit Note",
+      "reference_no": "DN-2026-001",
+      "document_date": "2026-10-20",
+      "house_bill_no": "HBL-PRESERVE-001"
+    },
+    "transaction_party": {
+      "issuer": "Destination Agent",
+      "recipient": "Origin Agent"
+    },
+    "charge_details": {
+      "charge_item": "Handling Charge",
+      "original_charge_item": "H/D Fee",
+      "amount": 30.0,
+      "currency": "USD",
+      "payment_term": "CC"
+    },
+    "financial_attributes": {
+      "accounting_entity": "Origin Agent",
+      "posting_type": "AP",
+      "settlement_effect": "INCREASE"
+    },
+    "audit_trail": {
+      "source_file": "人工构造的旧账示例",
+      "source_sha256": "",
+      "raw_text": "原金额USD30，付款方式CC，演示保留未修改字段。",
+      "ai_reasoning": ["仅用于演示增量修改，不是原ZIP业务材料"]
+    }
+  }
+]

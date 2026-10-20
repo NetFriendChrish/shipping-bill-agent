@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.env
+.env.*
+!.env.example
+/ocr_urls.json
+output/
+tmp/
+dist/
+*.pyc
+/*.zip
+/*.pdf
